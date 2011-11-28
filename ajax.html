@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript">
+      function ajaxThis(id){
+        link = document.getElementById(id);
+        href= link.getAttribute('href');
+        
+        xhr = new XMLHttpRequest();
+        
+        xhr.open("GET", href,true);
+        xhr.send();
+        xhr.onreadystatechange = function(){
+          if (xhr.readyState==4 && xhr.status==200){
+            document.getElementById("ajax").innerHTML=xhr.responseText;
+          }
+        }
+      }
+      
+    </script>
+    <style type="text/css" media="screen">
+      header{
+        height: 50px;
+        background: #eee;
+      }
+      footer{
+        height: 20px;
+        background: #eee;
+      }
+      .content{
+        width: 960px;
+        margin: 0 auto;
+        background: #f2f2f2;
+        height: 500px;
+      }
+      .navigation{
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>Ajax Demo</header>
+      <div class="content">
+        <div class="navigation">
+          <ul>
+            <li><a href="aboutus.html" id ="about" onclick ="ajaxThis('about'); return false;">About Us</a></li>
+            <li><a href="contact.html" id ="contact" onclick ="ajaxThis('contact'); return false;">Contact</a></li>
+            <li><a href="gallery.html" id ="gallery" onclick ="ajaxThis('gallery'); return false;">Gallery</a></li>
+          </ul>
+        </div>
+        <div id="ajax"></div>
+      </div>
+      <footer> &copy;</footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+    <script type="text/javascript">
+      var Flickr = Flickr || { images:[]};
+      
+      $(document).ready(function(){
+        //        $.ajax({
+        //          url: "http://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=flickerGet",
+        //          dataType:"jsonp",
+        //          type:"get"
+        //        });
+      });
+      
+      function flickerGet(data){
+        var $pics = data.items;
+        $.each($pics, function(index, pic){
+          var image_src =pic.media.m, img;
+          Flickr.images.push(image_src);          
+        });
+        
+        //start slide show
+        
+      }
+      
+      $(document).ready(function(){
+        var image_src = "http://farm7.static.flickr.com/6180/6194410989_47b0c2bd00_m.jpg", 
+        start_state= {
+          left:Math.ceil(Math.random()*800),
+          top:Math.ceil(Math.random()*800),
+          opacity:0
+        },
+        end_state= {
+          left:Math.ceil(Math.random()*800),
+          top:Math.ceil(Math.random()*800),
+          opacity:1
+        },
+        $parent= $("#wrapper");
+        
+        
+       
+        $("<img/>",{
+          src: image_src,
+          "class":"img"
+        })
+        .appendTo($parent).css(start_state)
+        .load(function(){
+          $(this).css(end_state).addClass("anim");          
+        });
+        
+        
+        
+        
+        
+        
+      });
+      
+      
+      
+    </script>
+
+    <style type="text/css" media="screen">
+      .img{
+        -moz-transition: all 1s ease-in;
+        -webkit-transition: all 1s ease-in;        
+        position: absolute;
+      }
+      .img.anim{
+        -webkit-animation-name:rotater; 
+        -webkit-animation-duration:1s; 
+        -webkit-animation-iteration-count:1; 
+        -webkit-animation-timing-function: ease-out;
+      }
+      @-webkit-keyframes rotater {
+        0% { -webkit-transform:rotate(0) }
+      100% { -webkit-transform:rotate(270deg) }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+  </body>
+</html>

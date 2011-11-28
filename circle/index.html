@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Circle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="../jquery-1.6.4.min.js">
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        assign_depth();
+        
+        $("#playground a").click(function(e){
+          var $this = $(this);
+          e.preventDefault();
+          check_leaf();
+          check_active_sibling($this);
+          $this.next().find(".has_child+ul").hide();
+          
+          if($this.hasClass("has_child")){
+            $this.addClass("active").next("ul").toggle();
+            check_overflow($this);
+          }else{
+            $this.addClass("leaf");
+          }
+        });
+        
+        var $playground = $("#playground");
+        
+        $playground.mousemove(function(e){
+          var leftX = $playground.offset().left,
+           leftY = $playground.offset().left+50,
+           rightX = $playground.offset().left+$playground.width()+50,
+           rightY = $playground.offset().left+$playground.width()-50;
+           
+           
+        });
+      });
+      
+      function check_leaf(){
+        $(".root .leaf").removeClass("leaf");
+      }
+      
+      function check_active_sibling(ele){
+        var $parentS =ele.parent().siblings();
+        $parentS.find("ul").hide();
+        $parentS.find(".active").removeClass("active");
+      }
+      
+      
+      
+      function assign_depth(){
+        $("#playground").find('ul').each(function() {
+          var depth = ($(this).parents('ul').length+1);
+          $(this).addClass('level-' + depth).data("depth",depth);
+        });
+      }
+      
+      function check_overflow(ele){
+        var depth = ele.next("ul").data("depth"),
+        child_check = ele.next("ul").children().filter("li:first-child").children("a"),
+        playground = $("#playground"),
+        playground_check = playground.offset().left+playground.width(),
+        ele_check = depth*child_check.width();
+        console.log("depth: "+depth,"ele_check:"+ele_check, "playground_check:"+playground_check);
+        if(ele_check > playground_check ){
+          
+          var diff = playground_check-ele_check;
+          console.log(diff);
+          scroll_root(diff);
+        }else{
+          scroll_root(0); 
+        }
+      
+        
+      }
+      function scroll_root(diff){
+        $(".root").stop().animate({
+          "margin-left": diff+"px"
+        }, 800);
+      }
+      
+      
+      
+    </script>
+    <style type="text/css" media="screen">
+      html,body{
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #playground{
+        width: 500px;
+/*        margin: 0 auto;*/
+        min-height: 100%;
+        background: #eee;
+        text-align: center;
+        overflow: hidden;
+      }
+      .root{
+        list-style: none;
+        list-style-image: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      ul li ul{
+        display: none;
+        padding: 0 0 0 150px;
+      }
+      li{
+        list-style: none;
+      }
+      li a{
+        text-decoration: none;
+        display: block;
+        width: 150px;
+        text-align: center;
+        background: #444;
+        color: #fff;
+        padding: 0.5em 0;
+      }
+      li a:hover{
+        opacity: 0.5;
+      }
+      li a.has_child{
+        color:  red;
+      }
+      li a.active{
+        background: red;
+        color: #fff;
+      }
+      li a.leaf{
+        background: orange;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="playground">
+      <ul class="root">
+        <li>
+          <a href="#" class="has_child">Root</a>
+          <ul>
+            <li>
+              <a href="" class="has_child">node1</a>
+              <ul>
+                <li>
+                  <a href="" class="has_child">node11</a>
+                  <ul>
+                    <li>
+                      <a href="">node111</a>
+                    </li>
+                    <li>
+                      <a href="">node112</a>
+                    </li>
+                    <li>
+                      <a href="">node113</a>
+                    </li>
+                    <li>
+                      <a href="">node114</a>
+                    </li>
+                    <li>
+                      <a href="" class="has_child">node115</a>
+                      <ul>
+                        <li>
+                          <a href="">node1151</a>
+                        </li>
+                        <li>
+                          <a href="">node1152</a>
+                        </li>
+                        <li>
+                          <a href="">node1153</a>
+                        </li>
+                        <li>
+                          <a href="">node1154</a>
+                        </li>
+                        <li>
+                          <a href="">node1155</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="" class="has_child">node12</a>
+                  <ul>
+                    <li>
+                      <a href="">node121</a>
+                    </li>
+                    <li>
+                      <a href="">node122</a>
+                    </li>
+                    <li>
+                      <a href="">node123</a>
+                    </li>
+                    <li>
+                      <a href="">node124</a>
+                    </li>
+                    <li>
+                      <a href="">node125</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="">node13</a>
+                </li>
+                <li>
+                  <a href="">node14</a>
+                </li>
+                <li>
+                  <a href="" class="has_child">node15</a>
+                  <ul>
+                    <li>
+                      <a href="">node151</a>
+                    </li>
+                    <li>
+                      <a href="">node152</a>
+                    </li>
+                    <li>
+                      <a href="" class="has_child">node153</a>
+                      <ul>
+                        <li>
+                          <a href="">node1531</a>
+                        </li>
+                        <li>
+                          <a href="">node1532</a>
+                        </li>
+                        <li>
+                          <a href="">node1533</a>
+                        </li>
+                        <li>
+                          <a href="" class="has_child">node15331</a>
+                          <ul>
+                            <li>
+                              <a href="">node153311</a>
+                            </li>
+                            <li>
+                              <a href="">node153312</a>
+                            </li>
+                            <li>
+                              <a href="" class="has_child">node153313</a>
+                              <ul>
+                                <li>
+                                  <a href="">node1533131</a>
+                                </li>
+                                <li>
+                                  <a href="" class="has_child">node1533132</a>
+                                  <ul>
+                                    <li>
+                                      <a href="">node15331321</a>
+                                    </li>
+                                    <li>
+                                      <a href="">node15331322</a>
+                                    </li>
+                                    <li>
+                                      <a href="">node15331323</a>
+                                    </li>
+                                    <li>
+                                      <a href="" class="has_child">node15331324</a>
+                                      <ul>
+                                        <li>
+                                          <a href="">node153313241</a>
+                                        </li>
+                                        <li>
+                                          <a href="">node153313242</a>
+                                        </li>
+                                        <li>
+                                          <a href="">node153313243</a>
+                                        </li>
+                                        <li>
+                                          <a href="">node153313244</a>
+                                        </li>
+                                        <li>
+                                          <a href="">node153313245</a>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                    <li>
+                                      <a href="">node15331325</a>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>
+                                  <a href="">node01</a>
+                                </li>
+                                <li>
+                                  <a href="">node01</a>
+                                </li>
+                                <li>
+                                  <a href="">node01</a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              <a href="">node153314</a>
+                            </li>
+                            <li>
+                              <a href="">node153315</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <a href="">node1535</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+
+
+            <li>
+              <a href="" class="has_child">node2</a>
+              <ul>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="" class="has_child">node01</a>
+                  <ul>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                    <li>
+                      <a href="">node01</a>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+              </ul>
+            </li>
+
+
+
+
+            <li>
+              <a href="">node3</a>
+            </li>
+
+
+
+            <li>
+              <a href="" class="has_child">node4</a>
+              <ul>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+                <li>
+                  <a href="">node01</a>
+                </li>
+              </ul>
+            </li>
+
+
+
+            <li>
+              <a href="">node5</a>
+            </li>
+          </ul>          
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

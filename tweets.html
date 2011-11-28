@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweets</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript">
+      
+      $(document).ready(function(){
+                
+        
+        navigator.geolocation.getCurrentPosition(function(pos){          
+          var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+          
+          $.ajax({
+                  url: 'http://search.twitter.com/search.json?q=ballarat&geocode='+pos.coords.latitude+','+pos.coords.longitude+',100km&rpp=50&result_type=recent&callback=?',
+        
+                  dataType:"jsonp",
+                  type:"get",
+                  success: function(data){
+                    console.log(data);
+                  }
+                });
+          
+          
+          
+          
+          
+          
+//var myOptions = {
+//zoom: 8,
+//center: latlng,
+//mapTypeId: google.maps.MapTypeId.ROADMAP
+//};
+//var map = new google.maps.Map(document.getElementById("playground"),     myOptions);
+//console.log(map);
+//var marker = new google.maps.Marker({
+//position: latlng, 
+//map: map,
+//title:"Hello World!"
+//});
+
+
+
+          
+          
+        }, function(){
+          alert("Some error occured");
+        });
+        
+        
+      });
+      
+    </script>
+
+
+    <style type="text/css" media="screen">
+      html{ height: 100%;}
+      body{ height: 100%; margin: 0;}
+      #playground{ height: 100%; background: #eee;}
+    </style>
+  </head>
+  <body>
+    <div id="playground"></div>
+  </body>
+</html>

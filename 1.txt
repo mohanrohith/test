@@ -1,0 +1,10 @@
+-webkit-box-align: stretch;
+-webkit-box-pack: start;
+bottom: auto;
+left: 0px;
+max-height: 619px;
+max-width: 1019px;
+overflow: hidden;
+right: auto;
+top: 229px;
+z-index: 123;

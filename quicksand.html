@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="jquery.quicksand.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".button").click(function(e){
+          e.preventDefault();
+          $('.all').quicksand( $('.warm li'), {
+            duration: 1000,
+            attribute: 'id'
+          });
+        });
+        
+      });
+    </script>
+
+    <style type="text/css" media="screen">
+      ul{
+        width: 300px;
+      }
+      li{
+        list-style: none;
+        margin: 5px;
+        border: 1px solid #ccc;
+        font-size: 12px;
+        background: #e2e2e2;
+        padding: 3px 10px;
+        color: #444;
+        width: 50px;
+        height: 30px;
+        float: left;
+        font-family: trebuchet MS;
+      }
+      
+      .warm{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <p><a class="button" href="#dummy">Apples to oranges</a></p>
+
+    <ul class="colors all">
+      <li id="c463033" style="background: #463033"></li>
+      <li id="c77343d" style="background: #77343d"></li>
+      <li id="ce83f2f" style="background: #e83f2f"></li>
+      <li id="cffc223" style="background: #ffc223"></li>
+      <li id="cffdb59" style="background: #ffdb59"></li>
+      <li id="c788b6f" style="background: #788b6f"></li>
+      <li id="c486a5e" style="background: #486a5e"></li>
+      <li id="c289539" style="background: #289539"></li>
+      <li id="c174876" style="background: #174876"></li>
+    </ul>
+
+    <ul class="colors warm">
+      <li id="c62164e" style="background: #62164e"></li>
+      <li id="c86286e" style="background: #86286e"></li>
+      <li id="cda79c2" style="background: #da79c2"></li>
+      <li id="cf39079" style="background: #f39079"></li>
+      <li id="ce83f2f" style="background: #e83f2f"></li>
+      <li id="cffc223" style="background: #ffc223"></li>
+      <li id="cffdb59" style="background: #ffdb59"></li>
+      <li id="cf2c478" style="background: #f2c478"></li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+    <script src="sockio.js"></script>
+    <script>
+      var socket = io.connect('http://localhost');
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
+    </script>
+
+    <style type="text/css" media="screen">
+      output{
+        display: block;
+        border: 1px groove #444;
+        width: 50%;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <output></output>
+  </body>
+</html>

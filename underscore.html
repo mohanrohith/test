@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Under Score Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="jquery-1.6.4.min.js"></script>
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        /* Map Function */
+        //        console.log("Map Function");
+        //        console.log(_.map([1, 2, 3], function(n){ return n * 2; }));
+        //        console.log(_([1, 2, 3]).map( function(n){ return n * 3; }));
+        
+        var 
+        lyrics = [
+          {line : 1, words : "I'm a lumberjack and I'm okay"},
+          {line : 2, words : "I sleep all night and I work all day"},
+          {line : 3, words : "He's a lumberjack and he's okay"},
+          {line : 4, words : "He sleeps all night and he works all day"}
+        ],
+        obj = {
+          first_name: "Rohith",
+          last_name:"Mohan",
+          gender: "male",
+          height: "5.6",
+          weight: "70"
+          
+        },
+        num =[1,2,3,4,5,6,7,8,9,10];
+        
+        
+    console.log(_.detect(num,function(num, index){
+      return num % 5 == 0;;
+    }));
+    console.log(_.select(num,function(num, index){
+      return num % 2 == 0;;
+    }));
+    console.log(_.reject(num,function(num, index){
+      return num % 2 == 0;;
+    }));
+        
+        //        _.reduce(num, function(memo, num){
+        //          console.log(memo, num);
+        //          return memo+=num;
+        //        });
+        
+        //        console.log(
+        //        _(lyrics)
+        //        .chain()
+        //        .map(function(line){
+        //          return line.words.split(" ");
+        //        })
+        //        .flatten()
+        //        .reduce(function(counts, word){
+        //          counts[word] = (counts[word] || 0) + 1;
+        //          return counts;
+        //        },{}).value()
+        //      );
+        
+        //        _.each(lyrics, function(line, index){
+        //          console.log(line, index);
+        //        });
+        //        
+        //        _.each(obj, function(value, key){
+        //          console.log( key, value);
+        //        });
+        //        
+        //        console.log(_.map(obj,function(value, key){
+        //          return key += value.length;
+        //        }));
+        
+        
+      })();
+    </script>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
